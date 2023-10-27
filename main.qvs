@@ -1,4 +1,6 @@
-﻿SET ThousandSep='.';
+﻿Trace Mainload start;
+
+SET ThousandSep='.';
 SET DecimalSep=',';
 SET MoneyThousandSep=',';
 SET MoneyDecimalSep='.';
@@ -23,3 +25,4 @@ LET vMaxJahr = year(today());
 LET vVorJahr = year(today())-1;
 
 Trace new testing;
+Trace newcommit;
