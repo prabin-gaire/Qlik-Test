@@ -21,9 +21,8 @@ LOAD
     ShipperID,
     Order_source
     
-FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
-(ooxml, embedded labels, table is orders)
-;
+FROM [lib://Schulung (qliksensevm_qlikp010)/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is orders);
 
 Let vOrdersDataLoaded = '*** Laden der Daten von Orders_Data abgeschlossen. ' &NoOfRows('Orders_Data') &' Reihen wurden geladen ***';
 
@@ -36,7 +35,7 @@ LOAD
     Year("Date") as Year,
     Target,
     Order_source
-FROM [lib://DataFiles/Targets.xlsx]
+FROM [lib://Schulung (qliksensevm_qlikp010)/Targets.xlsx]
 (ooxml, embedded labels, table is Targets);
 
 
@@ -58,7 +57,7 @@ LOAD
     "Base currency",
     Latitude,
     Longitude
-FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+FROM [lib://Schulung (qliksensevm_qlikp010)/SalesData_oatsdrink_company.xlsx]
 (ooxml, embedded labels, table is customers);
 
 
@@ -74,7 +73,7 @@ LOAD
     JobTitle,
     ManagerName,
     WeeklyHours
-FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+FROM [lib://Schulung (qliksensevm_qlikp010)/SalesData_oatsdrink_company.xlsx]
 (ooxml, embedded labels, table is employees);
 
 
@@ -92,7 +91,7 @@ LOAD
     UnitsOnOrder,
     Location,
     CategoryID
-FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+FROM [lib://Schulung (qliksensevm_qlikp010)/SalesData_oatsdrink_company.xlsx]
 (ooxml, embedded labels, table is products);
 
 
@@ -103,7 +102,7 @@ LOAD
     CategoryID,
     CategoryName,
     Description
-FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+FROM [lib://Schulung (qliksensevm_qlikp010)/SalesData_oatsdrink_company.xlsx]
 (ooxml, embedded labels, table is categories);
 
 exit script;
