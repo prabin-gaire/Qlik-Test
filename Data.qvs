@@ -1,0 +1,108 @@
+﻿Trace ***** Lade die Orders_Data Tabelle *****;
+
+Orders_Data:
+
+LOAD
+
+    OrderID,
+    CustomerID,
+    EmployeeKey as EmployeeID,
+    ProductID,
+    LineNo,
+    Quantity,
+    UnitPrice,
+    Quantity * UnitPrice as Sales_Amount,
+    Discount,
+    OrderDate,
+    year(OrderDate) as Year,
+    month(OrderDate) as Month_OrderDate,
+    quartername(OrderDate) as transaction_quarter,
+    quartername(OrderDate, -1) as previous_quarter,
+    ShipperID,
+    Order_source
+    
+FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is orders)
+;
+
+Let vOrdersDataLoaded = '*** Laden der Daten von Orders_Data abgeschlossen. ' &NoOfRows('Orders_Data') &' Reihen wurden geladen ***';
+
+Trace $(vOrdersDataLoaded);				// Trace erzeugt einen String im Ladeeditor
+
+
+Concatenate(Orders_Data)
+LOAD
+    "Date" as OrderDate, 
+    Year("Date") as Year,
+    Target,
+    Order_source
+FROM [lib://DataFiles/Targets.xlsx]
+(ooxml, embedded labels, table is Targets);
+
+
+
+Trace ***** Lade die Customers Tabelle *****;
+
+Customers:
+
+LOAD
+    CustomerID,
+    Customer,
+    Contact,
+    City,
+    Country,
+    Division,
+    Address,
+    Phone,
+    PostalCode,
+    "Base currency",
+    Latitude,
+    Longitude
+FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is customers);
+
+
+Trace ***** Lade die Employees Tabelle *****;
+
+Employees:
+
+LOAD
+    EmployeeID,
+    "Last Name",
+    "First Name",
+    Team,
+    JobTitle,
+    ManagerName,
+    WeeklyHours
+FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is employees);
+
+
+Trace ***** Lade die Products Tabelle *****;
+
+Products:
+
+LOAD
+    ProductID,
+    Product,
+    CategoryName,
+    QuantityPerUnit,
+    UnitCost,
+    UnitsInStock,
+    UnitsOnOrder,
+    Location,
+    CategoryID
+FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is products);
+
+
+left join(Products)
+
+
+LOAD
+    CategoryID,
+    CategoryName,
+    Description
+FROM [lib://DataFiles/SalesData_oatsdrink_company.xlsx]
+(ooxml, embedded labels, table is categories);
+
